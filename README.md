@@ -13,6 +13,7 @@ A small codebase for emulating appointment.
 [![NPM version][shield-npm]](#)
 [![Node.js version support][shield-node]](#)
 [![Dependencies][shield-dependencies]](#)
+[![Code coverage][shield-coverage]](#)
 
 ## Table of Contents
 
@@ -70,13 +71,19 @@ npm run start
 
 ## Assumptions Made
 
+- Only works with proper table structure `table` > `thead` & `tbody` > `tr` > `td`
+- Only works if the first row is numeric
+- Non numeric value will be ignored
+- 1.46 m (4 ft 9 1⁄2 in) is considered numberic: `1.46`
+- 20 May 1922 is considered numeric: `20`
+
 ## Task Requirements
 
 - [x] Node JS - Wokrer
 - [x] Node JS - API
 - [ ] React JS - UI
 - [x] Package your application in a Docker container.
-- [ ] Achieve >80% test coverage.
+- [x] Achieve >80% test coverage.
 - [x] Healthcheck endpoint.
 - [x] OpenAPI 3 Docs (Swagger).
 - [x] Infrastructure as Code (CloudFormation).
@@ -89,13 +96,14 @@ npm run start
 
 Time breakdown:
 
-- backend development: 0.5 hour.
+- backend development: 1.5 hours.
 - frontend development: 0 hour.
 - documentation: 0.25 hour.
 - operation: 0.25 hour.
 
 [node]: https://nodejs.org/
 [npm]: https://www.npmjs.com/
+[shield-coverage]: https://img.shields.io/badge/coverage-97%44-brightgreen.svg
 [shield-dependencies]: https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg
 [shield-license]: https://img.shields.io/badge/license-MIT-blue.svg
 [shield-node]: https://img.shields.io/badge/node.js%20support-10.16.2-brightgreen.svg

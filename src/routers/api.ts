@@ -6,6 +6,8 @@ import {
   NextFunction as expressNextFunction,
 } from 'express';
 
+import { getManyNumbers } from '../modules/handler/api/plotter';
+
 const router = expressRouter();
 
 router.get(
@@ -14,5 +16,7 @@ router.get(
     response.send('healthy');
   }
 );
+
+router.get('/api/v1/plotter/numbers', getManyNumbers);
 
 export default router;
