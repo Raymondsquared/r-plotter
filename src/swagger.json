@@ -1,0 +1,99 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "API Documentation for Plotter API",
+    "version": "0.0.1",
+    "title": "Swagger for Plotter API",
+    "contact": { "email": "raymond_squared@live.com" }
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "plotter",
+      "description": "ploter related"
+    }
+  ],
+  "schemes": ["https"],
+  "paths": {
+    "/plotter/numbers": {
+      "post": {
+        "tags": ["appointment"],
+        "summary": "Get numbers from a given URL",
+        "description": "Returns numbers value for a  given URL",
+        "operationId": "getManyNumbers",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "source URL",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get operation",
+            "schema": {
+              "type": "object",
+              "items": { "$ref": "#/components/schemas/NumberOutput" }
+            }
+          }
+        }
+      }
+    },
+    "/plotter/image": {
+      "post": {
+        "tags": ["appointment"],
+        "summary": "Get plot image for a given URL",
+        "description": "Returns png image from a given URL",
+        "operationId": "getOnePlotImage",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "source URL",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get operation",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PlotterError": {
+        "type": "object",
+        "properties": {
+          "httpStatusCode": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "NumberOutput": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "error": {
+            "$ref": "#/components/schemas/PlotterError"
+          }
+        }
+      }
+    }
+  }
+}

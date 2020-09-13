@@ -1,0 +1,26 @@
+steps:
+  - label: ':npm: test'
+    key: 'test'
+    command:
+      - 'npm install'
+      - 'npm run test'
+  - wait
+  - label: ':npm: Build'
+    key: 'build'
+    command:
+      - 'npm install'
+      - 'npm run build'
+      - 'docker build -f Dockerfile -t r-web-api:latest .'
+  - wait
+  - label: ':docker: Publish'
+    key: 'publish'
+    command:
+      - 'docker images'
+      - 'docker tag r-web-api:latest 126574484161.dkr.ecr.ap-southeast-2.amazonaws.com/r-web-api:latest'
+      - 'docker push 126574484161.dkr.ecr.ap-southeast-2.amazonaws.com/r-web-api'
+    plugins:
+      ecr#v1.1.4:
+        login: true
+        account_ids: '126574484161'
+        no-include-email: true
+        region: 'ap-southeast-2'
