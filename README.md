@@ -69,6 +69,8 @@ npm run start
 
 ## To Do
 
+- UI Testing
+
 ## Assumptions Made
 
 - Only works with proper table structure `table` > `thead` & `tbody` > `tr` > `td`
@@ -81,7 +83,7 @@ npm run start
 
 - [x] Node JS - Wokrer
 - [x] Node JS - API
-- [ ] React JS - UI
+- [x] React JS - UI
 - [x] Package your application in a Docker container.
 - [x] Achieve >80% test coverage.
 - [x] Healthcheck endpoint.
@@ -89,7 +91,7 @@ npm run start
 - [x] Infrastructure as Code (CloudFormation).
 - [x] Cloudfront CDN.
 - [x] HTTPS from the gateway layer.
-- [ ] Mobile first UI.
+- [x] Mobile first UI.
 - [x] AWESOME architecture diagram.
 
 ## Other Information
@@ -97,7 +99,7 @@ npm run start
 Time breakdown:
 
 - backend development: 1.5 hours.
-- frontend development: 0 hour.
+- frontend development: 1 hour.
 - documentation: 0.25 hour.
 - operation: 0.25 hour.
 
