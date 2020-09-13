@@ -16,7 +16,7 @@
   "schemes": ["https"],
   "paths": {
     "/plotter/numbers": {
-      "post": {
+      "get": {
         "tags": ["appointment"],
         "summary": "Get numbers from a given URL",
         "description": "Returns numbers value for a  given URL",
@@ -42,9 +42,9 @@
       }
     },
     "/plotter/image": {
-      "post": {
+      "get": {
         "tags": ["appointment"],
-        "summary": "Get plot image for a given URL",
+        "summary": "Get plot image from a given URL",
         "description": "Returns png image from a given URL",
         "operationId": "getOnePlotImage",
         "produces": ["application/json"],

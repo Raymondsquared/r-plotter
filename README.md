@@ -98,7 +98,7 @@ npm run start
 
 Time breakdown:
 
-- backend development: 1.5 hours.
+- backend development: 2 hours.
 - frontend development: 1 hour.
 - documentation: 0.25 hour.
 - operation: 0.25 hour.

@@ -6,7 +6,7 @@ import {
   NextFunction as expressNextFunction,
 } from 'express';
 
-import { getManyNumbers } from '../modules/handler/api/plotter';
+import { getManyNumbers, getOnePlotImage } from '../modules/handler/api/plotter';
 
 const router = expressRouter();
 
@@ -18,5 +18,6 @@ router.get(
 );
 
 router.get('/api/v1/plotter/numbers', getManyNumbers);
+router.get('/api/v1/plotter/image', getOnePlotImage);
 
 export default router;
