@@ -112,7 +112,7 @@ describe('GIVEN `getFirstNumbersTableColumnFromHTML` method in `HTMLMainService`
   });
 
   describe('WHEN it is invoked with one number column', () => {
-    it('THEN it should return invalid output', async () => {
+    it('THEN it should return valid output', async () => {
       const oneNumberInput = '<table><tbody><tr><td>123</td></tr></tbody></table>';
       const oneNumberAndStringInput = '<table><tbody><tr><td>123 meter</td></tr></tbody></table>';
       const expectedOutput: Output<number[]> = {
@@ -129,7 +129,7 @@ describe('GIVEN `getFirstNumbersTableColumnFromHTML` method in `HTMLMainService`
   });
 
   describe('WHEN it is invoked with one number column', () => {
-    it('THEN it should return invalid output', async () => {
+    it('THEN it should return valid output', async () => {
       const oneNumberColumnInput =
         '<table><tbody><tr><td>123</td></tr><tr><td>234.1</td></tr></tbody></table>';
       const oneNumberAndStringColumnInput =
@@ -148,7 +148,7 @@ describe('GIVEN `getFirstNumbersTableColumnFromHTML` method in `HTMLMainService`
   });
 
   describe('WHEN it is invoked with one number column', () => {
-    it('THEN it should return invalid output', async () => {
+    it('THEN it should return valid output', async () => {
       const oneNumberColumnInput =
         '<table><tbody><tr><td>123</td></tr><tr><td>234.1</td></tr></tbody></table>';
       const oneNumberAndStringColumnInput =
@@ -167,7 +167,7 @@ describe('GIVEN `getFirstNumbersTableColumnFromHTML` method in `HTMLMainService`
   });
 
   describe('WHEN it is invoked with multiple tables', () => {
-    it('THEN it should return invalid output', async () => {
+    it('THEN it should return valid output', async () => {
       const firstTable =
         '<table><tbody><tr><td>123</td></tr><tr><td>234</td></tr></tbody></table><table><tbody><tr><td>abc</td></tr></tbody></table>';
       const lastTable =
@@ -186,7 +186,7 @@ describe('GIVEN `getFirstNumbersTableColumnFromHTML` method in `HTMLMainService`
   });
 
   describe('WHEN it is invoked with sample data', () => {
-    it('THEN it should return invalid output', async () => {
+    it('THEN it should return valid output', async () => {
       const expectedOutput: Output<number[]> = {
         data: [
           1.464,
