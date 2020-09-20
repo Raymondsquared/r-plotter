@@ -105,7 +105,7 @@ Time breakdown:
 
 [node]: https://nodejs.org/
 [npm]: https://www.npmjs.com/
-[shield-coverage]: https://img.shields.io/badge/coverage-97%44-brightgreen.svg
+[shield-coverage]: https://img.shields.io/badge/coverage-96%58-brightgreen.svg
 [shield-dependencies]: https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg
 [shield-license]: https://img.shields.io/badge/license-MIT-blue.svg
 [shield-node]: https://img.shields.io/badge/node.js%20support-10.16.2-brightgreen.svg

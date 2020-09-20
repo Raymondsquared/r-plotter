@@ -254,3 +254,32 @@ describe('GIVEN `getFirstNumbersTableColumnFromHTML` method in `HTMLMainService`
     });
   });
 });
+
+describe('GIVEN `getFirstNumbersDivColumnFromHTML` method in `HTMLMainService` module', () => {
+  describe('WHEN it is invoked with empty input', () => {
+    it('THEN it should return valid output', async () => {
+      const expectedOutput: Output<number[]> = {
+        error: InvalidTableExtractionSourceError,
+        data: null,
+      };
+
+      expect(await htmlService.getFirstNumbersDivColumnFromHTML(undefined)).toEqual(expectedOutput);
+      expect(await htmlService.getFirstNumbersDivColumnFromHTML(null)).toEqual(expectedOutput);
+      expect(await htmlService.getFirstNumbersDivColumnFromHTML('')).toEqual(expectedOutput);
+    });
+  });
+
+  describe('WHEN it is invoked with one number column', () => {
+    it('THEN it should return valid output', async () => {
+      const oneNumberInput =
+        '<div class="table"> <div class="row"> <div class="cell"> Mike </div><div class="cell"> 123 </div><div class="cell"> Architect </div></div><div class="row"> <div class="cell"> Sunil </div><div class="cell"> 456.1 years </div><div class="cell"> Vice President </div></div><div class="row"> <div class="cell"> Jason </div></div></div>';
+      const expectedOutput: Output<number[]> = {
+        data: [123, 456.1],
+      };
+
+      expect(await htmlService.getFirstNumbersDivColumnFromHTML(oneNumberInput)).toEqual(
+        expectedOutput
+      );
+    });
+  });
+});

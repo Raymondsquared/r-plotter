@@ -131,6 +131,103 @@ class HTMLMainService implements HTMLService {
       return output;
     }
   }
+
+  async getFirstNumbersDivColumnFromHTML(html: string): Promise<Output<number[]>> {
+    const output = {
+      data: null,
+    } as Output<number[]>;
+
+    try {
+      if (isEmpty(html)) {
+        output.error = InvalidTableExtractionSourceError;
+        return output;
+      }
+      const cheerioStatic: CheerioStatic = cheerio.load(html);
+      let firstNumericDivTableIndex: number;
+      let firstNumericDivTableData: CheerioElement;
+      let firstNumericDivColumnIndex: number;
+      const numericColumn: number[] = [];
+
+      // Find first matching table & column with number
+      cheerioStatic('div.table').each((tableNumber: number, tableElement: CheerioElement) => {
+        for (const trElement of tableElement?.children) {
+          if (
+            trElement.name !== 'div' ||
+            !trElement.attribs ||
+            trElement.attribs['class'] !== 'row'
+          ) {
+            continue;
+          }
+
+          const tdElements = trElement?.children;
+          for (let columnNumber = 0; columnNumber < tdElements?.length; columnNumber++) {
+            if (
+              tdElements[columnNumber].name !== 'div' ||
+              !tdElements[columnNumber].attribs ||
+              tdElements[columnNumber].attribs['class'] !== 'cell'
+            ) {
+              continue;
+            }
+
+            const elementWithText = tdElements[columnNumber]?.children?.find(
+              (ce: CheerioElement) => {
+                if (ce.type === 'text') {
+                  return !Number.isNaN(parseFloat(ce.data));
+                }
+              }
+            );
+
+            if (isEmpty(firstNumericDivTableData) && !isEmpty(elementWithText)) {
+              firstNumericDivTableIndex = tableNumber;
+              firstNumericDivColumnIndex = columnNumber;
+              firstNumericDivTableData = elementWithText;
+            }
+          }
+        }
+      });
+
+      // Get the whole numeric column
+      cheerioStatic('div.table').each((tableNumber: number, tableElement: CheerioElement) => {
+        if (tableNumber === firstNumericDivTableIndex) {
+          for (const trElement of tableElement?.children) {
+            if (
+              !trElement ||
+              trElement.name !== 'div' ||
+              !trElement.attribs ||
+              trElement.attribs['class'] !== 'row' ||
+              isEmpty(trElement?.children) ||
+              isEmpty(trElement?.children[firstNumericDivColumnIndex]) ||
+              isEmpty(trElement?.children[firstNumericDivColumnIndex].children)
+            ) {
+              continue;
+            }
+
+            for (const tdElement of trElement?.children[firstNumericDivColumnIndex]?.children) {
+              if (tdElement.type === 'text') {
+                const data = tdElement.data;
+                const cleansedData = tdElement.data.replace(/[^0-9.]/g, '');
+                const numericData = parseFloat(cleansedData);
+                if (!Number.isNaN(numericData)) {
+                  numericColumn.push(numericData);
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // console.log('firstNumericDivTableIndex', firstNumericDivTableIndex);
+      // console.log('firstNumericDivTableData', firstNumericDivTableData);
+      // console.log('firstNumericDivColumnIndex', firstNumericDivColumnIndex);
+      // console.log('numericColumn', numericColumn);
+      output.data = numericColumn;
+    } catch (error) {
+      console.error(error);
+      output.error = TableExtractionError;
+    } finally {
+      return output;
+    }
+  }
 }
 
 export { HTMLMainService };
